@@ -1,0 +1,13 @@
+---
+name: APlayerJoinSet
+main: AriefaL\PlayerJoinSetting\Main
+
+api:
+- 3.0.0
+- 4.0.0
+
+author: AriefaL
+version: 1.0
+
+description: follow my instagram @aariefal_ Thanks for use!
+...
