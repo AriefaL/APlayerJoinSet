@@ -1,17 +1,15 @@
 ---
 ###############################################################
-# Activate or deactivate that when teleporting joint to the spawn of a particular world.
-# Use "Your_World_Name" or leave it empty (like: "") to not set a spawn point.
 # Decide if the [ClearInvntory, Gamemode, FallDamage, NoHunger] should be emptied for each join.
 # Use "true" for activate or "false" for deactivate.
-# Here "World-Setting" is to world de
 Player-Join:
   ClearInv: true
-  Gamemode: true
-  # NOTE: if set 'true'
-  # Format = [SURVIVAL = 0, CREATIVE = 1]
-  #          [ADVENTURE = 2, SPECTATOR = 3]
-  setGamemode: 0
+  Gamemode:
+    # NOTE: if set 'true' you can set gamemode player join.
+    Enable: true
+    # Format = [SURVIVAL = 0, CREATIVE = 1]
+    #          [ADVENTURE = 2, SPECTATOR = 3]
+    setGamemode: 0
   NoFallDamage: false
   NoHunger: false
   
