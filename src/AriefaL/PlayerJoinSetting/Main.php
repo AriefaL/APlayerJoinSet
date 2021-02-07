@@ -18,10 +18,10 @@ use pocketmine\utils\TextFormat;
 class Main extends PluginBase implements Listener {
 
     public function onEnable(){
-        $this->saveResource("settings.yml");
-        $this->settings = new Config($this->getDataFolder() . "settings.yml", Config::YAML);
+        	$this->saveResource("settings.yml");
+        	$this->settings = new Config($this->getDataFolder() . "settings.yml", Config::YAML);
         
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+        	$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		$this->getServer()->getLogger()->info("§6[§fEnabling Plugin AJoinSetPlayer§6]");
     }
     
@@ -41,14 +41,14 @@ class Main extends PluginBase implements Listener {
 		
 		// Here is Setting Player Join to Clear Inventory Player
 		if($this->settings->getNested("Player-Join.ClearInv") == true) {
-            $player->getArmorInventory()->clearAll();
+            		$player->getArmorInventory()->clearAll();
 			$player->getInventory()->clearAll();
-        }
+        	}
 		
 		// And Here to Setting Gamemode to Player
-		if($this->settings->getNested("Player-Join.Gamemode") == true) {
-            $player->setGamemode($this->settings->getNested("Player-Join.setGamemode"));
-        }else{
+		if($this->settings->getNested("Player-Join.Gamemode.Enable") == true) {
+            		$player->setGamemode($this->settings->getNested("Player-Join.Gamemode.setGamemode"));
+       		}else{
 			$player->setGamemode($this->getServer()->getDefaultGamemode());
 		}
 		
@@ -59,10 +59,10 @@ class Main extends PluginBase implements Listener {
 		}
     }
 	
-	public function noFallDamage(EntityDamageEvent $event){
+    public function noFallDamage(EntityDamageEvent $event){
 		$player = $event->getEntity();
 		if ($event->getCause() === EntityDamageEvent::CAUSE_FALL) {
-			if($player->getAllowFlight() == true){
+			if($player->isCreative()){
 				$event->setCancelled(true);
 			}else{
 				$event->setBaseDamage(3.0);
@@ -71,16 +71,16 @@ class Main extends PluginBase implements Listener {
 		}
     }
 	
-	public function onExhaust(PlayerExhaustEvent $event) {
+    public function onExhaust(PlayerExhaustEvent $event) {
 		$player = $event->getPlayer();
-        if(!$player instanceof Player){
+        	if(!$player instanceof Player){
 			$player->setHealth($this->settings->getNested("Player-Join.Hunger-Heal.Heal"));
 			$player->setFood($this->settings->getNested("Player-Join.Hunger-Heal.Hunger"));
-        }
+        	}
 		$event->setCancelled($this->settings->getNested("Player-Join.NoHunger"));
     }
 	
-	public function onDisable(){
-        $this->getServer()->getLogger()->info("§6[§cDisabling Plugin AJoinSetPlayer§6]");
+    public function onDisable(){
+        	$this->getServer()->getLogger()->info("§6[§cDisabling Plugin AJoinSetPlayer§6]");
 	}
 }
